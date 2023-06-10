@@ -49,6 +49,7 @@ create_repository:
     - {name: 'to test (customer)', color: 'F1C40F', description: 'To be tested (customer)'}
     - {name: 'waiting for customer', color: '48AF19', description: 'Waiting for a customer action'}
     - {name: 'environment', color: 'C40F1F', description: 'Environment related (staging, production, ...)'}
+    - {name: 'vote', color: 'F415B0', description: 'Vote related'}
   # Template
   enable_no_template: true
   templates:
