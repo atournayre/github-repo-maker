@@ -1,12 +1,12 @@
-# Repositories creator helper
+# GitHub Repo Maker
 
 Ce repository met à disposition des outils pour créer des repositories GitHub.
 
-Des configuartions sont disponibles dans le dossier **config**.
+Détail de l'arborescence
+- 📁 config *(configurations disponibles)*
+- 📁 issues *(templates d'issues)*
+- 📁 templates *(templates de fichiers)*
 
-Des templates d'issues et de fichiers sont disponibles dans le dossier **issues**.
-
-Des templates de fichiers sont disponibles dans le dossier **templates**.
 
 ## Installation
 1. Exécuter la commande `php repository-creator.phar init config/default.yaml`
