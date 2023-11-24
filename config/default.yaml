@@ -58,15 +58,45 @@ create_repository:
     #- { name: atournayre/default-template, include_all_branches: true }
   # Files
   files:
+    # Default files
+    - .gitignore
+    - install.sh
+
+    # Configuration de l'éditeur
+    - .editorconfig
+
+    # Qualité de code
+    - .php-cs-fixer.dist.php
+
+    # Analyse statique de code
+    - .github/workflows/rector.yml
+    - .github/workflows/stan.yml
+
+    # Sécurité
     - .github/dependabot.yml
+
+    # Code review
+    - .github/workflows/labeler.yml
+    - .github/labeler.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - .github/reviewers.yml
+
+    # Issues
     - .github/ISSUE_TEMPLATE/BUG-REPORT.yml
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml
-    - .github/PULL_REQUEST_TEMPLATE.md
-    # - { path: composer.json, url: https://github.com/atournayre/symfony-skeleton/blob/master/composer.json }    # Github actions
+
+    # CI
+    - .github/workflows/docker.yml
     - .github/workflows/labeler.yml
-    - .github/labeler.yml
-    - .github/reviewers.yml
+
+    # GitGuardian
+    - .github/workflows/secrets.yml
+    - .gitguardian.yml
+    - .pre-commit-config.yaml
+
+    # Divers
+    # - { path: composer.json, url: https://github.com/atournayre/symfony-skeleton/blob/master/composer.json }    # Github actions
   # Milestones
   milestones:
     - { title: 'Initial setup', description: "Initial setup of the environment", due_on: ~ }
