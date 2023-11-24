@@ -1,8 +1,8 @@
 create_repository:
   # Locale
-  locale: en
+  locale: fr
   # User
-  user: ~
+  user: atournayre
   # Defaults
   # defaults:
     # client_name: ~
@@ -23,7 +23,7 @@ create_repository:
     - issues-tracker
     - poc
   # Branches
-  main_branch: ~
+  main_branch: main
   develop_branch: develop
   branches:
     - main
@@ -49,7 +49,6 @@ create_repository:
     - {name: 'to test (customer)', color: 'F1C40F', description: 'To be tested (customer)'}
     - {name: 'waiting for customer', color: '48AF19', description: 'Waiting for a customer action'}
     - {name: 'environment', color: 'C40F1F', description: 'Environment related (staging, production, ...)'}
-    - {name: 'vote', color: 'F415B0', description: 'Vote related'}
   # Template
   enable_no_template: true
   templates:
@@ -58,45 +57,15 @@ create_repository:
     #- { name: atournayre/default-template, include_all_branches: true }
   # Files
   files:
-    # Default files
-    - .gitignore
-    - install.sh
-
-    # Configuration de l'éditeur
-    - .editorconfig
-
-    # Qualité de code
-    - .php-cs-fixer.dist.php
-
-    # Analyse statique de code
-    - .github/workflows/rector.yml
-    - .github/workflows/stan.yml
-
-    # Sécurité
     - .github/dependabot.yml
-
-    # Code review
-    - .github/workflows/labeler.yml
-    - .github/labeler.yml
-    - .github/PULL_REQUEST_TEMPLATE.md
-    - .github/reviewers.yml
-
-    # Issues
     - .github/ISSUE_TEMPLATE/BUG-REPORT.yml
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml
-
-    # CI
-    - .github/workflows/docker.yml
-    - .github/workflows/labeler.yml
-
-    # GitGuardian
-    - .github/workflows/secrets.yml
-    - .gitguardian.yml
-    - .pre-commit-config.yaml
-
-    # Divers
+    - .github/PULL_REQUEST_TEMPLATE.md
     # - { path: composer.json, url: https://github.com/atournayre/symfony-skeleton/blob/master/composer.json }    # Github actions
+    - .github/workflows/labeler.yml
+    - .github/labeler.yml
+    - .github/reviewers.yml
   # Milestones
   milestones:
     - { title: 'Initial setup', description: "Initial setup of the environment", due_on: ~ }
@@ -122,58 +91,56 @@ create_repository:
   # Codeowners
   codeowners:
     reviewers:
-      defaults: defaut-reviewer
+      defaults: atournayre
       repository_owners:
-        - repository-owner
+        - atournayre
       infra_devs:
-        - infra-devs-user
+        - atournayre
       architecture_devs:
-        - architecture-devs-user
+        - atournayre
       frontend_devs:
-        - frontend-devs-user
+        - atournayre
       backend_devs:
-        - backend-devs-user
+        - atournayre
       full_team:
-        - member-1
-        - member-2
-        - member-3
+        - atournayre
       lead_infra:
-        - lead-infra-user
+        - atournayre
       lead_architecture:
-        - lead-architecture-user
+        - atournayre
       lead_frontend:
-        - lead-frontend-user
+        - atournayre
       lead_backend:
-        - lead-backend-user
+        - atournayre
     patterns:
-      - { pattern: 'Docker*', owners: [lead_infra] }
-      - { pattern: 'docker*', owners: [lead_infra] }
-      - { pattern: '.env*', owners: [lead_infra] }
-      - { pattern: '.git*', owners: [lead_infra] }
-      - { pattern: 'package*', owners: [lead_infra, lead_frontend] }
-      - { pattern: '*.lock', owners: [lead_infra] }
-      - { pattern: 'composer.*', owners: [lead_infra, lead_backend] }
-      - { pattern: 'fixtures/', owners: [lead_architecture] }
-      - { pattern: 'tests/', owners: [lead_architecture] }
-      - { pattern: 'phpunit.xml.dist', owners: [lead_architecture] }
-      - { pattern: 'tools/', owners: [lead_infra] }
-      - { pattern: 'deploy/', owners: [lead_infra] }
-      - { pattern: 'docs/', owners: [full_team] }
-      - { pattern: '*.md', owners: [full_team] }
-      - { pattern: '.github/workflows/', owners: [lead_infra] }
-      - { pattern: 'migrations/*', owners: [lead_architecture] }
-      - { pattern: '*.js', owners: [lead_frontend] }
-      - { pattern: '*.css', owners: [lead_frontend] }
-      - { pattern: 'assets/', owners: [lead_frontend] }
-      - { pattern: 'templates/', owners: [lead_frontend] }
-      - { pattern: '*.twig', owners: [lead_frontend] }
-      - { pattern: '*.jpg', owners: [lead_frontend] }
-      - { pattern: '*.png', owners: [lead_frontend] }
-      - { pattern: '*.svg', owners: [lead_frontend] }
-      - { pattern: '*.gif', owners: [lead_frontend] }
-      - { pattern: '*.ico', owners: [lead_frontend] }
-      - { pattern: '*.webp', owners: [lead_frontend] }
-      - { pattern: 'webpack.config.js', owners: [lead_infra, lead_frontend] }
-      - { pattern: '*.php', owners: [lead_backend] }
+      - { pattern: 'Docker*', owners: [atournayre] }
+      - { pattern: 'docker*', owners: [atournayre] }
+      - { pattern: '.env*', owners: [atournayre] }
+      - { pattern: '.git*', owners: [atournayre] }
+      - { pattern: 'package*', owners: [atournayre] }
+      - { pattern: '*.lock', owners: [atournayre] }
+      - { pattern: 'composer.*', owners: [atournayre] }
+      - { pattern: 'fixtures/', owners: [atournayre] }
+      - { pattern: 'tests/', owners: [atournayre] }
+      - { pattern: 'phpunit.xml.dist', owners: [atournayre] }
+      - { pattern: 'tools/', owners: [atournayre] }
+      - { pattern: 'deploy/', owners: [atournayre] }
+      - { pattern: 'docs/', owners: [atournayre] }
+      - { pattern: '*.md', owners: [atournayre] }
+      - { pattern: '.github/workflows/', owners: [atournayre] }
+      - { pattern: 'migrations/*', owners: [atournayre] }
+      - { pattern: '*.js', owners: [atournayre] }
+      - { pattern: '*.css', owners: [atournayre] }
+      - { pattern: 'assets/', owners: [atournayre] }
+      - { pattern: 'templates/', owners: [atournayre] }
+      - { pattern: '*.twig', owners: [atournayre] }
+      - { pattern: '*.jpg', owners: [atournayre] }
+      - { pattern: '*.png', owners: [atournayre] }
+      - { pattern: '*.svg', owners: [atournayre] }
+      - { pattern: '*.gif', owners: [atournayre] }
+      - { pattern: '*.ico', owners: [atournayre] }
+      - { pattern: '*.webp', owners: [atournayre] }
+      - { pattern: 'webpack.config.js', owners: [atournayre] }
+      - { pattern: '*.php', owners: [atournayre] }
   pull_requests:
     ci_checks: ~
