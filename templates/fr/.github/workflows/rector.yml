@@ -1,0 +1,20 @@
+name: Qualité de code
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "develop"
+      - "main"
+      - "master"
+
+jobs:
+  rector:
+    name: Rector
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Rector
+        uses: zingimmick/rector-action@0.0.2
+        with:
+          args: --config=tools/rector/code_quality.php --dry-run --clear-cache

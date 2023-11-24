@@ -1,0 +1,81 @@
+name: Static Analysis
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "develop"
+      - "main"
+      - "master"
+env:
+  php-extensions: "json, sodium, ctype, iconv"
+  php-tools: "composer:v2"
+
+jobs:
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: "GIT > Checkout"
+        uses: "actions/checkout@v3"
+      - name: "Cache"
+        uses: actions/cache@v3
+        with:
+          path: .php-cs-fixer.cache
+          key: ${{ runner.OS }}-${{ github.repository }}-phpcsfixer-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.OS }}-${{ github.repository }}-phpcsfixer-
+
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+
+  phpstan:
+    name: PHPStan
+    runs-on: "${{ matrix.operating-system }}"
+    strategy:
+      matrix:
+        include:
+          - operating-system: "ubuntu-20.04"
+            php-version: "8.2"
+    
+    steps:
+      - name: "GIT > Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "PHP > Install"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          extensions: "${{ env.php-extensions }}"
+          tools: "${{ env.php-tools }}"
+          coverage: "none"
+
+      - name: "Composer > Define cache directory"
+        id: "php-composer-cache"
+        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+
+      #            - name: "Validate Composer"
+      #              run: "composer validate"
+
+      - name: "Composer > Cache dependencies"
+        uses: "actions/cache@v2"
+        with:
+          path: "${{ steps.php-composer-cache.outputs.dir }}"
+          key: "${{ runner.os }}-composer-${{  hashFiles('**/composer.json', '**/composer.lock') }}"
+          restore-keys: "${{ runner.os }}-composer-"
+
+      - name: "Project > Install PHP dependencies"
+        run: "composer update --no-interaction --no-progress --prefer-dist --prefer-stable"
+
+      - name: "PHPStan > Install PHP dependencies"
+        run: "composer update --no-interaction --no-progress --prefer-dist --prefer-stable --working-dir=tools/phpstan"
+
+      - name: "PHPStan > Cache data"
+        uses: "actions/cache@v2"
+        with:
+          path: "var/tools/PHPStan"
+          key: "${{ runner.os }}-phpstan"
+          restore-keys: "${{ runner.os }}-phpstan"
+
+      - name: "PHPStan > Run"
+        run: "make phpstan"

@@ -1,0 +1,72 @@
+includes:
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
+
+parameters:
+    disallowedFunctionCalls:
+        -
+            function:
+                - 'str_replace()'
+            message: 'use Symfony\Component\String\u() instead, because it is more secure and toString() performs assertion'
+        -
+            function:
+                - 'dump()'
+                - 'dd()'
+                - 'var_dump()'
+                - 'print_r()'
+            message: 'dumping is not allowed'
+        -
+            function:
+                - 'ini_set()'
+                - 'ini_get()'
+                - 'ini_restore()'
+            message: 'ini_* functions are not allowed'
+        -
+            function:
+                - 'phpinfo()'
+            message: 'phpinfo() is not allowed'
+        -
+            function:
+                - 'eval()'
+            message: 'eval() is not allowed'
+        -
+            function:
+                - 'die()'
+                - 'exit()'
+            message: 'die() and exit() are not allowed'
+
+    disallowedMethodCalls:
+        -
+            method: 'Carbon::createFromFormat()'
+            message: 'use CarbonHelper::createFromFormat() instead because assertion is mandatory'
+        -
+            method: 'Carbon::create()'
+            message: 'use CarbonHelper::create() instead because assertion is mandatory'
+
+    disallowedSuperglobals:
+        -
+            superglobal: '$_GET'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_POST'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_REQUEST'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_SERVER'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_SESSION'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_COOKIE'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_FILES'
+            message: 'use the Request methods instead'
+        -
+            superglobal: '$_ENV'
+            message: 'use the Request methods instead'

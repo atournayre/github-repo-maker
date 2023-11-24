@@ -1,0 +1,11 @@
+includes:
+    - tools/phpstan/disallowed-calls.neon
+
+parameters:
+    level: 9
+    resultCachePath: %currentWorkingDirectory%/var/tools/PHPStan/resultCache.src.php
+    #excludePaths:
+    treatPhpDocTypesAsCertain: false
+    checkGenericClassInNonGenericObjectType: false
+    checkUninitializedProperties: true
+    #ignoreErrors:

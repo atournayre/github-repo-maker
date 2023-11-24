@@ -1,0 +1,70 @@
+name: Docker
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "develop"
+      - "main"
+      - "master"
+
+jobs:
+  docker_build:
+    name: Build
+    runs-on: "${{ matrix.operating-system }}"
+    strategy:
+      matrix:
+        include:
+          - operating-system: "ubuntu-20.04"
+            php-version: "8.2"
+
+    steps:
+      - name: "GIT > Checkout"
+        uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 0
+
+      - name: "GIT > Get changed files"
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+
+      - name: "GIT > List all changed files"
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: "GIT > Get changed files in the docker folder"
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v35
+        with:
+          files: |
+            docker
+            docker-compose.override.yml
+            docker-compose.prod.yml
+            docker-compose.yml
+            Dockerfile
+
+      - name: "Docker > Pull"
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: docker compose pull
+
+      - name: "Docker > UP"
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: docker compose up --build -d
+
+      - name: "Docker > Check PHP service"
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
+            case $status in
+              starting) sleep 1;;
+              healthy) exit 0;;
+              unhealthy) exit 1;;
+            esac
+          done
+          exit 1
+
+      - name: "HTTPS > Check reachability"
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: curl -k https://localhost

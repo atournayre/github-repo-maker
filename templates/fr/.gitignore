@@ -1,0 +1,49 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+# Uploads
+/public/uploads/**/*.jpg
+/public/uploads/**/*.png
+/public/uploads/**/*.jpeg
+/public/uploads/**/*.gif
+/public/uploads/**/*.svg
+/public/uploads/**/*.webp
+/public/uploads/**/*.mp4
+/public/uploads/**/*.webm
+/public/uploads/**/*.ogg
+
+# QA
+/tools/*/vendor
+/tools/*/composer.lock
+/tools/reports/*.txt
+!/tools/reports/.gitkeep
+.php-cs-fixer.cache
+
+# Déploiement
+deploy/.env
+!deploy/.env.*
+
+# Tests
+tests/Functional/_data/*.sql
+
+# GitGuardian
+.cache_ggshield
