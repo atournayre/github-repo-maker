@@ -1,0 +1,194 @@
+create_repository:
+  # Locale
+  locale: fr
+  # User
+  user: atournayre
+  # Defaults
+  # defaults:
+    # client_name: ~
+    # project_name: default-project
+    # project_type: application
+    # description: This is a default project
+    # visibility: private
+    # main_branch: main
+    # contributors:
+      # - user1
+      # - user2
+  # Repository
+  project_types:
+    - component
+    - bundle
+    - application
+    - template
+    - issues-tracker
+    - poc
+  # Branches
+  main_branch: main
+  develop_branch: develop
+  branches:
+    - main
+    - develop
+  # Labels
+  labels:
+    - {name: 'docker', color: 'FF5733', description: 'A Docker file has been added or modified'}
+    - {name: 'dependencies', color: 'EC7063', description: 'A composer or package file has been added or modified'}
+    - {name: 'fixtures', color: '85C1E9', description: 'Fixtures have been added or modified'}
+    - {name: 'tests', color: '7DCEA0', description: 'Tests have been added or modified'}
+    - {name: 'tools', color: '2E86C1', description: 'Tools have been added or modified'}
+    - {name: 'deployment', color: '884EA0', description: 'Deployment files have been added or modified'}
+    - {name: 'docs', color: 'F5B041', description: 'Documentation has been added or modified'}
+    - {name: 'ci', color: 'D35400', description: 'CI files have been added or modified'}
+    - {name: 'migrations', color: 'BA4A00', description: 'Database migrations have been added or modified'}
+    - {name: 'front', color: '7DCEA0', description: 'Related to the front'}
+    - {name: 'api', color: 'F1948A', description: 'Related to the API'}
+    - {name: 'back', color: 'F7DC6F', description: 'Related to the back'}
+    - {name: 'env', color: '117A65', description: 'Related to .env files'}
+    - {name: 'git', color: '633974', description: 'Related to git files'}
+    - {name: 'pull request', color: '16A085', description: 'A PR has been opened'}
+    - {name: 'to test (internal)', color: 'D98880', description: 'To be tested (internal)'}
+    - {name: 'to test (customer)', color: 'F1C40F', description: 'To be tested (customer)'}
+    - {name: 'waiting for customer', color: '48AF19', description: 'Waiting for a customer action'}
+    - {name: 'environment', color: 'C40F1F', description: 'Environment related (staging, production, ...)'}
+  # Template
+  enable_no_template: true
+  templates:
+    # To create a new repository in an organization, the authenticated user must be a member of the specified organization.
+    # https://docs.github.com/fr/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-using-a-template
+    #- { name: atournayre/default-template, include_all_branches: true }
+  # Files
+  files:
+    - .github/dependabot.yml
+    - .github/ISSUE_TEMPLATE/BUG-REPORT.yml
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    # - { path: composer.json, url: https://github.com/atournayre/symfony-skeleton/blob/master/composer.json }    # Github actions
+    - .github/workflows/labeler.yml
+    - .github/labeler.yml
+    - .github/reviewers.yml
+  folders:
+    - src/Api
+    - src/Api/Documentation
+    - src/Api/Resource
+    - src/Collection
+    - src/Command
+    - src/Contracts
+    - src/Controller
+    - src/Decorator
+    - src/Doctrine
+    - src/Doctrine/Extension
+    - src/DTO
+    - src/Engine
+    - src/Entity
+    - src/Entity/Embedded
+    - src/Entity/Exception
+    - src/Entity/Traits
+    - src/Enum
+    - src/Event
+    - src/Event/Dispatcher
+    - src/Event/Event
+    - src/Exception
+    - src/Fixture
+    - src/Fixture/Purger
+    - src/Form
+    - src/Generateur
+    - src/Http
+    - src/Listener
+    - src/Logger
+    - src/Migration
+    - src/Normalizer
+    - src/Profiler
+    - src/Profiler/DataCollector
+    - src/Repository
+    - src/Search
+    - src/Security
+    - src/Service
+    - src/Service/Listener
+    - src/Service/Subscriber
+    - src/Service/State
+    - src/Service/State/Processor
+    - src/Service/State/Provider
+    - src/State
+    - src/State/Provider
+    - src/State/Processor
+    - src/Subscriber
+    - src/Traits
+    - src/VO
+  # Milestones
+  milestones:
+    - { title: 'Initial setup', description: "Initial setup of the environment", due_on: ~ }
+    - { title: 'Model', description: 'Data model', due_on: ~ }
+    - { title: 'Fixtures', description: 'Uses cases and test datas', due_on: ~ }
+    - { title: 'Deployment scripts', description: 'Delivery/installation scripts', due_on: ~ }
+    - { title: 'Staging environment', description: "Staging related configuration", due_on: ~ }
+    - { title: 'Production environment', description: "Production related configuration", due_on: ~ }
+    - { title: 'First version (release 0.0)', description: 'First version for internal purposes or beta testers', due_on: ~ }
+    - { title: 'Release 1.0', description: 'First release', due_on: ~ }
+  # Issues
+  issues:
+    - { title: 'Domain name(s)', file: 'domain_names.md', labels: [environment, waiting for customer], milestone: 'Initial setup' }
+    - { title: 'Docker', file: 'docker.md', labels: [environment, docker, back, git, dependencies, front, api, docs], milestone: 'Initial setup' }
+    - { title: 'Send emails', file: 'send_emails.md', labels: [environment, back, env, git], milestone: 'Initial setup' }
+    - { title: 'Fixtures', file: 'fixtures.md', labels: [fixtures], milestone: 'Fixtures' }
+    - { title: 'DNS Listing', file: 'dns.md', labels: [environment, waiting for customer], milestone: 'Staging environment' }
+    - { title: 'CORS', file: 'cors.md', labels: [back, front, api], milestone: ~ }
+    - { title: 'Deployment', file: 'deployment.md', labels: [deployment], milestone: 'Deployment scripts' }
+    - { title: 'Google Maps', file: 'google_maps.md', labels: [front, back, api], milestone: ~ }
+    - { title: 'Meilisearch', file: 'meilisearch.md', labels: [api], milestone: ~ }
+    - { title: 'Messenger', file: 'messenger.md', labels: [back], milestone: ~ }
+  # Codeowners
+  codeowners:
+    reviewers:
+      defaults: atournayre
+      repository_owners:
+        - atournayre
+      infra_devs:
+        - atournayre
+      architecture_devs:
+        - atournayre
+      frontend_devs:
+        - atournayre
+      backend_devs:
+        - atournayre
+      full_team:
+        - atournayre
+      lead_infra:
+        - atournayre
+      lead_architecture:
+        - atournayre
+      lead_frontend:
+        - atournayre
+      lead_backend:
+        - atournayre
+    patterns:
+      - { pattern: 'Docker*', owners: [atournayre] }
+      - { pattern: 'docker*', owners: [atournayre] }
+      - { pattern: '.env*', owners: [atournayre] }
+      - { pattern: '.git*', owners: [atournayre] }
+      - { pattern: 'package*', owners: [atournayre] }
+      - { pattern: '*.lock', owners: [atournayre] }
+      - { pattern: 'composer.*', owners: [atournayre] }
+      - { pattern: 'fixtures/', owners: [atournayre] }
+      - { pattern: 'tests/', owners: [atournayre] }
+      - { pattern: 'phpunit.xml.dist', owners: [atournayre] }
+      - { pattern: 'tools/', owners: [atournayre] }
+      - { pattern: 'deploy/', owners: [atournayre] }
+      - { pattern: 'docs/', owners: [atournayre] }
+      - { pattern: '*.md', owners: [atournayre] }
+      - { pattern: '.github/workflows/', owners: [atournayre] }
+      - { pattern: 'migrations/*', owners: [atournayre] }
+      - { pattern: '*.js', owners: [atournayre] }
+      - { pattern: '*.css', owners: [atournayre] }
+      - { pattern: 'assets/', owners: [atournayre] }
+      - { pattern: 'templates/', owners: [atournayre] }
+      - { pattern: '*.twig', owners: [atournayre] }
+      - { pattern: '*.jpg', owners: [atournayre] }
+      - { pattern: '*.png', owners: [atournayre] }
+      - { pattern: '*.svg', owners: [atournayre] }
+      - { pattern: '*.gif', owners: [atournayre] }
+      - { pattern: '*.ico', owners: [atournayre] }
+      - { pattern: '*.webp', owners: [atournayre] }
+      - { pattern: 'webpack.config.js', owners: [atournayre] }
+      - { pattern: '*.php', owners: [atournayre] }
+  pull_requests:
+    ci_checks: ~
