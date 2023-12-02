@@ -15,6 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Rector
-        uses: zingimmick/rector-action@0.0.2
+        uses: zingimmick/rector-action@0.1.0
         with:
           args: --config=tools/rector/code_quality.php --dry-run --clear-cache

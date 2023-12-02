@@ -45,7 +45,7 @@ parameters:
         -
             function:
                 - 'phpinfo()'
-            message: 'Exposing the PHP cConfiguration is a security risk'
+            message: 'Exposing the PHP configuration is a security risk'
         -
             function:
                 - 'die()'
