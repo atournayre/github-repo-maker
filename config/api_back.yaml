@@ -62,10 +62,12 @@ create_repository:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml
     - .github/PULL_REQUEST_TEMPLATE.md
-    # - { path: composer.json, url: https://github.com/atournayre/symfony-skeleton/blob/master/composer.json }    # Github actions
     - .github/workflows/labeler.yml
     - .github/labeler.yml
     - .github/reviewers.yml
+    - tools/phpstan/disallowed-calls.neon
+    - phparkitect.php
+    - phpstan.neon
   folders:
     - src/Api
     - src/Api/Documentation
